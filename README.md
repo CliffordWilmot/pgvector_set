@@ -1,14 +1,14 @@
-# pgvector_chem
+# pgvector_set
 
-Distance metrics used in chemoinformatics domains for Postgres [pgvector][pgvector]. Provides:
+Sample set distance metrics for Postgres [pgvector][pgvector]. Provides:
 
-+ Tanimoto/Jaccard-Index for dichotomous values
++ Jaccard/Tanimoto distance for boolean vectors.
 
 ## Installation
 
 ```shell
-git clone https://github.com/leotaku/pgvector_chem
-cd pgvector_chem
+git clone https://github.com/CliffordWilmot/pgvector_set
+cd pgvector_set
 make CC=cc && make install
 ```
 
@@ -30,7 +30,7 @@ CREATE EXTENSION vector_chem;
 
 ### Querying
 
-We define the operator `<^>` for computing the Tanimoto distance between two vectors of dichotomous values.
+We define the operator `<^>` for computing the Jaccard distance between two vectors of boolean values represented with 0.0 and 1.0.
 
 ```tsql
 SELECT '[1., 0., 1.]' <^> '[1., 0., 1.]';
@@ -52,13 +52,7 @@ SELECT tanimoto_distance('[1., 0., 1.]', '[1., 0., 0.]');
 
 ## FAQ
 
-### Should I use this library?
-
-Unless you need to support the Tanimoto/Jaccard-Index for historical reasons, you are probably better served by the cosine distance (`<=>`) built in to [pgvector][pgvector].
-
-Cosine distance has been shown to carry essentially the same information as Tanimoto/Jaccard in a wide range of applications.[<sup>1</sup>][bajusz2015]
-
-### Is the provided Tanimoto/Jaccard-Index distance usable for continuous values?
+### Is the provided Jaccard/Tanimoto distance usable for continuous values?
 
 Not at this time.
 
@@ -66,12 +60,3 @@ Not at this time.
 
 Not at this time.
 
-[pgvector]: https://github.com/pgvector/pgvector#pgvector
-[bajusz2015]: https://jcheminf.biomedcentral.com/articles/10.1186/s13321-015-0069-3
-
-## License
-
-`pgvector_chem` is free and open source software distributed under the terms of The PostgreSQL License.
-
-Substantial parts of the extension have been adapted from the existing `pgvector` extension.
-As such, their copyright assignments should also be observed and their original license has been included in this code distribution.
