@@ -3,19 +3,19 @@
 
 -- functions
 
-CREATE FUNCTION tanimoto_distance(vector, vector) RETURNS float8
+CREATE FUNCTION jaccard_distance(vector, vector) RETURNS float8
 	AS 'MODULE_PATHNAME' LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
 
 -- operators
 
 CREATE OPERATOR <^> (
-	LEFTARG = vector, RIGHTARG = vector, PROCEDURE = tanimoto_distance,
+	LEFTARG = vector, RIGHTARG = vector, PROCEDURE = jaccard_distance,
 	COMMUTATOR = '<^>'
 );
 
 -- opclasses
 
-CREATE OPERATOR CLASS vector_tanimoto_ops
+CREATE OPERATOR CLASS vector_jaccard_ops
 	FOR TYPE vector USING hnsw AS
 	OPERATOR 1 <^> (vector, vector) FOR ORDER BY float_ops,
-	FUNCTION 1 tanimoto_distance(vector, vector);
+	FUNCTION 1 jaccard_distance(vector, vector);

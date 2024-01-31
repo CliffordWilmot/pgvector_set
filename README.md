@@ -40,11 +40,11 @@ SELECT '[1., 0., 1.]' <^> '[1., 0., 1.]';
 -- (1 row)
 ```
 
-The function `tanimoto_distance` is also defined and computes the same result as the `<^>` operator.
+The function `jaccard_distance` is also defined and computes the same result as the `<^>` operator.
 
 ```tsql
-SELECT tanimoto_distance('[1., 0., 1.]', '[1., 0., 0.]');
---  tanimoto_distance
+SELECT jaccard_distance('[1., 0., 1.]', '[1., 0., 0.]');
+--  jaccard_distance
 -- -------------------
 --                0.5
 -- (1 row)

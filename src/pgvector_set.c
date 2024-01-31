@@ -19,20 +19,20 @@ CheckDims(Vector * a, Vector * b)
 }
 
 /*
- * Get the tanimoto distance between two vectors of binary values
+ * Get the Jaccard distance between two vectors of binary values
  * Assumes inputs are binary vectors
  */
-PGDLLEXPORT PG_FUNCTION_INFO_V1(tanimoto_distance);
+PGDLLEXPORT PG_FUNCTION_INFO_V1(jaccard_distance);
 Datum
-tanimoto_distance(PG_FUNCTION_ARGS)
+jaccard_distance(PG_FUNCTION_ARGS)
 {
 	Vector	   *a = PG_GETARG_VECTOR_P(0);
 	Vector	   *b = PG_GETARG_VECTOR_P(1);
 	float	   *ax = a->x;
 	float	   *bx = b->x;
-	float		tania = 0.0;
-	float		tanib = 0.0;
-	float		tanic = 0.0;
+	float		jacc_a = 0.0;
+	float		jacc_b = 0.0;
+	float		jacc_c = 0.0;
 	double		similarity;
 
 	CheckDims(a, b);
@@ -40,13 +40,12 @@ tanimoto_distance(PG_FUNCTION_ARGS)
 	/* Auto-vectorized */
 	for (int i = 0; i < a->dim; i++)
 	{
-		tania += ax[i];
-		tanib += bx[i];
-        tanic += ax[i] * bx[i];
+		jacc_a += ax[i];
+		jacc_b += bx[i];
+        jacc_c += ax[i] * bx[i];
 	}
 
-	/* Use sqrt(a * b) over sqrt(a) * sqrt(b) */
-	similarity = (double) tanic / ((double) tania + (double) tanib - (double) tanic) ;
+	similarity = (double) jacc_c / ((double) jacc_a + (double) jacc_b - (double) jacc_c) ;
 
 #ifdef _MSC_VER
 	/* /fp:fast may not propagate NaN */
