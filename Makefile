@@ -1,9 +1,9 @@
-EXTENSION = vector_chem
+EXTENSION = pgvector_set
 EXTVERSION = 0.1.0
 
-MODULE_big = vector_chem
+MODULE_big = pgvector_set
 DATA = $(wildcard sql/*--*.sql)
-OBJS = src/vector_chem.o
+OBJS = src/pgvector_set.o
 HEADERS = src/vector.h
 
 TESTS = $(wildcard test/sql/*.sql)

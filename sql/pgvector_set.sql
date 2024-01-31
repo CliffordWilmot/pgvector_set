@@ -1,5 +1,5 @@
 -- complain if script is sourced in psql, rather than via CREATE EXTENSION
-\echo Use "CREATE EXTENSION vector_chem" to load this file. \quit
+\echo Use "CREATE EXTENSION pgvector_set" to load this file. \quit
 
 -- functions
 
