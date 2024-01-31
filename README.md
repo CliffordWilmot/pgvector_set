@@ -1,6 +1,6 @@
 # pgvector_set
 
-Sample set distance metrics for Postgres [pgvector][pgvector]. Provides:
+Sample set distance metrics for Postgres pgvector. Provides:
 
 + Jaccard/Tanimoto distance for boolean vectors.
 
@@ -16,7 +16,7 @@ make CC=cc && make install
 
 ### Setup
 
-In order to use the functionality provided by this extension first install and enable the [pgvector][pgvector] extension.
+In order to use the functionality provided by this extension first install and enable the pgvector extension.
 
 ```tsql
 CREATE EXTENSION vector;
